@@ -29,9 +29,15 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I uncheck "ratings_G"
   And I uncheck "ratings_PG-13"
   # enter step to "submit" the search form on the homepage
+  And I press "ratings_submit"
   # enter step(s) to ensure that PG and R movies are visible
+  Then I should see "PG"
+  Then I should see "<td>R</td>"
   # enter step(s) to ensure that other movies are not visible
-
+  Then I should see "<td>PG-13</td>"
+  Then I should see "<td>G</td>"
+#Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |field, parent, value|
+  #Then the 
 Scenario: no ratings selected
   # see assignment
 
