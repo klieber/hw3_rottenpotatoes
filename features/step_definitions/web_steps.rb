@@ -138,6 +138,26 @@ Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
   end
 end
 
+Then /^(?:|I )should see \/([^\/]*)\/ inside of (.*)$/ do |regexp,element|
+  regexp = Regexp.new(regexp)
+
+  if page.respond_to? :should
+    page.should have_xpath("//*/#{element}", :text => regexp)
+  else
+    assert page.has_xpath?("//*/#{element}", :text => regexp)
+  end
+end
+
+Then /^(?:|I )should not see \/([^\/]*)\/ inside of (.*)$/ do |regexp,element|
+  regexp = Regexp.new(regexp)
+
+  if page.respond_to? :should
+    page.should have_no_xpath("//*/#{element}", :text => regexp)
+  else
+    assert page.has_no_xpath?("//*/#{element}", :text => regexp)
+  end
+end
+
 Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field, parent, value|
   with_scope(parent) do
     field = find_field(field)
