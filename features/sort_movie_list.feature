@@ -20,10 +20,14 @@ Background: movies have been added to database
   | Chicken Run             | G      | 21-Jun-2000  |
 
   And I am on the RottenPotatoes home page
+  And I check the following ratings: PG, R, PG-13, G
+  And I press "ratings_submit"
 
 Scenario: sort movies alphabetically
-  # your steps here
+  When I follow "title_header"
+  Then the movies should be sorted by "title"
 
 Scenario: sort movies in increasing order of release date
-  # your steps here
+  When I follow "release_date_header"
+  Then the movies should be sorted by "release_date"
 
